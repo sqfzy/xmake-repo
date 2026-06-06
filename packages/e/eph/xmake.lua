@@ -17,13 +17,18 @@ package("eph")
         -- xmake build: the post-split tree carries DPDK-coupled binary targets
         -- (eph_nicd, eph_nicctl, ...) that fail to build on hosts without DPDK,
         -- which would break portable consumption. Instead, merge every module's
-        -- public include/ tree into the package include dir — each module owns a
-        -- disjoint eph/<module>/ subtree, so the merge never collides.
+        -- public include/ tree into the package include dir.
+        --
+        -- Copy FILE-BY-FILE with {rootdir=inc} (not dir-by-dir): modules share
+        -- parent dirs — e.g. eph-net owns eph/net/*.hpp while eph-net-kernel
+        -- owns eph/net/kernel/*.hpp. A dir-level os.cp clobbers the shared
+        -- eph/net/ subtree (one module's copy wins); a file-level copy that
+        -- preserves each file's path relative to inc merges them correctly.
         local count = 0
         for _, dir in ipairs(os.dirs("eph-*")) do
             local inc = path.join(dir, "include")
             if os.isdir(inc) then
-                os.cp(path.join(inc, "*"), package:installdir("include"))
+                os.cp(path.join(inc, "**"), package:installdir("include"), {rootdir = inc})
                 count = count + 1
             end
         end
