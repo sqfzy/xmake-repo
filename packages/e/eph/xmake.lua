@@ -3,9 +3,10 @@ package("eph")
     set_description("High-frequency trading C++ primitives (header-only modules)")
 
     set_urls("https://github.com/sqfzy/ephemeral.git")
-    -- v0.1.0 — post-split layout (eph-core / eph-utils / eph-net / eph-codec /
-    -- eph-net-kernel / eph-json / ...). Pin to the exact commit for
-    -- reproducible, machine-portable fetches.
+    -- Pin to an exact commit for reproducible, machine-portable fetches.
+    -- 0.2.0 = ephemeral@1a4e9df: StreamConfig.ws/.kernel + WsCodec::encode_text
+    -- (the API market_infra_eph consumes). The older v0.1.0 tag predates it.
+    add_versions("0.2.0", "1a4e9dfeac4fda7e4756326d1864c2fd80c7d9f0")
     add_versions("0.1.0", "5f2bc6b2040af48756948d4cb6b926bca2502c15")
 
     -- eph headers log through spdlog (SPDLOG_ACTIVE_LEVEL gated), so every
