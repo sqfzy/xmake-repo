@@ -19,16 +19,21 @@ package("eph")
         -- which would break portable consumption. Instead, merge every module's
         -- public include/ tree into the package include dir.
         --
-        -- Copy FILE-BY-FILE with {rootdir=inc} (not dir-by-dir): modules share
-        -- parent dirs — e.g. eph-net owns eph/net/*.hpp while eph-net-kernel
-        -- owns eph/net/kernel/*.hpp. A dir-level os.cp clobbers the shared
-        -- eph/net/ subtree (one module's copy wins); a file-level copy that
-        -- preserves each file's path relative to inc merges them correctly.
+        -- Copy each header INDIVIDUALLY: modules share parent dirs — e.g.
+        -- eph-net owns eph/net/*.hpp while eph-net-kernel owns
+        -- eph/net/kernel/*.hpp. A directory-level os.cp (even with {rootdir})
+        -- REPLACES the shared eph/net/ subtree, so the second module silently
+        -- wipes the first's files. Copying one file at a time to its computed
+        -- destination only ever creates/overwrites that single file, so the
+        -- module trees merge cleanly.
+        local installdir = package:installdir("include")
         local count = 0
         for _, dir in ipairs(os.dirs("eph-*")) do
             local inc = path.join(dir, "include")
             if os.isdir(inc) then
-                os.cp(path.join(inc, "**"), package:installdir("include"), {rootdir = inc})
+                for _, file in ipairs(os.files(path.join(inc, "**"))) do
+                    os.cp(file, path.join(installdir, path.relative(file, inc)))
+                end
                 count = count + 1
             end
         end
