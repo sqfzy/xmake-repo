@@ -10,6 +10,10 @@ package("eph")
     -- stream driven across poll cycles (was: blocks until Established).
     -- 0.2.0 = ephemeral@1a4e9df: StreamConfig.ws/.kernel + WsCodec::encode_text
     -- (the API market_infra_eph consumes). The older v0.1.0 tag predates it.
+    -- 0.4.0 = ephemeral@79cfeb9: eph-sbe Binance WS-API/order/exec/stream SBE
+    -- accessors + nested messageData decode; eph-net Ed25519 signer (Binance
+    -- session.logon). Additive over 0.3.0.
+    add_versions("0.4.0", "79cfeb9755c7eb783cc53a134edb0d1f85fb2dda")
     add_versions("0.3.0", "855723015e5bbf9da307ec7a14705d5f9f3ed713")
     add_versions("0.2.0", "1a4e9dfeac4fda7e4756326d1864c2fd80c7d9f0")
     add_versions("0.1.0", "5f2bc6b2040af48756948d4cb6b926bca2502c15")
