@@ -13,6 +13,10 @@ package("eph")
     -- 0.4.0 = ephemeral@79cfeb9: eph-sbe Binance WS-API/order/exec/stream SBE
     -- accessors + nested messageData decode; eph-net Ed25519 signer (Binance
     -- session.logon). Additive over 0.3.0.
+    -- 0.4.1 = ephemeral@ecf3677: eph-sbe is_supported accepts version >= pinned
+    -- (Binance serves "highest compatible" schema — live WS API answers 3:4 to a
+    -- 3:2 request; accessors are append-only forward-compatible).
+    add_versions("0.4.1", "ecf36779f2c8ce0b9393ca768c13bd6b502e63db")
     add_versions("0.4.0", "79cfeb9755c7eb783cc53a134edb0d1f85fb2dda")
     add_versions("0.3.0", "855723015e5bbf9da307ec7a14705d5f9f3ed713")
     add_versions("0.2.0", "1a4e9dfeac4fda7e4756326d1864c2fd80c7d9f0")
