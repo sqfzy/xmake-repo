@@ -16,6 +16,13 @@ package("eph")
     -- 0.4.1 = ephemeral@ecf3677: eph-sbe is_supported accepts version >= pinned
     -- (Binance serves "highest compatible" schema — live WS API answers 3:4 to a
     -- 3:2 request; accessors are append-only forward-compatible).
+    -- 0.5.0 = ephemeral@7d78512: logging overhaul — single compile-time gate
+    -- EPH_ENABLE_LOG (default OFF → eph emits NOTHING, zero hot-path cost, never
+    -- touches the host's spdlog default logger nor opens a sink). When enabled,
+    -- per-subsystem `eph.*` named loggers via EPH_LOG_*/eph::log::get; removes the
+    -- old self-creating stdout loggers. Header/API-compatible for consumers
+    -- (SBE/net/codec unchanged) — additive over 0.4.1.
+    add_versions("0.5.0", "7d7851217d400b431815aa1e1a5fd74a55d9f8df")
     add_versions("0.4.1", "ecf36779f2c8ce0b9393ca768c13bd6b502e63db")
     add_versions("0.4.0", "79cfeb9755c7eb783cc53a134edb0d1f85fb2dda")
     add_versions("0.3.0", "855723015e5bbf9da307ec7a14705d5f9f3ed713")
