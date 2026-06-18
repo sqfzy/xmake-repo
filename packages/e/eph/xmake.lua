@@ -25,6 +25,10 @@ package("eph")
     -- 0.5.1 = ephemeral@a8b001b: eph-sbe exposes cancel_order::transact_time_us
     -- (CancelOrderResponse field id=5 @ block offset +18) — symmetric with
     -- new_order_ack, lets consumers measure cancel uplink latency. Additive over 0.5.0.
+    -- 0.5.2 = ephemeral@e0bad78: eph-sbe exposes web_socket_response::for_each_rate_limit
+    -- (envelope rateLimits group id=100) → per-IP REQUEST_WEIGHT/ORDERS {limit,current} for
+    -- usage-driven throttling. Additive over 0.5.1.
+    add_versions("0.5.2", "e0bad78ab91ec9a7275e4859b7e5084158c66439")
     add_versions("0.5.1", "a8b001b28637764cff27a0c357b0f9f13a0fbb91")
     add_versions("0.5.0", "7d7851217d400b431815aa1e1a5fd74a55d9f8df")
     add_versions("0.4.1", "ecf36779f2c8ce0b9393ca768c13bd6b502e63db")
