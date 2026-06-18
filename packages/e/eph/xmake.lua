@@ -28,6 +28,9 @@ package("eph")
     -- 0.5.2 = ephemeral@e0bad78: eph-sbe exposes web_socket_response::for_each_rate_limit
     -- (envelope rateLimits group id=100) → per-IP REQUEST_WEIGHT/ORDERS {limit,current} for
     -- usage-driven throttling. Additive over 0.5.1.
+    -- 0.5.3 = ephemeral@c249cbc: eph-utils TokenBucket circuit-breaker — penalize_for(d) /
+    -- blocked() → fold a venue rate-limit/ban backoff into the same bucket. Additive over 0.5.2.
+    add_versions("0.5.3", "c249cbceb345f704e0e9843f22413327aaae72ce")
     add_versions("0.5.2", "e0bad78ab91ec9a7275e4859b7e5084158c66439")
     add_versions("0.5.1", "a8b001b28637764cff27a0c357b0f9f13a0fbb91")
     add_versions("0.5.0", "7d7851217d400b431815aa1e1a5fd74a55d9f8df")
