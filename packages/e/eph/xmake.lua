@@ -30,6 +30,13 @@ package("eph")
     -- usage-driven throttling. Additive over 0.5.1.
     -- 0.5.3 = ephemeral@c249cbc: eph-utils TokenBucket circuit-breaker — penalize_for(d) /
     -- blocked() → fold a venue rate-limit/ban backoff into the same bucket. Additive over 0.5.2.
+    -- 0.5.4 = ephemeral@d1acf46: trim orphaned eph-utils headers (audit_log / ema / hugepage /
+    -- phased_timer / timestamp) AND add a TSC-anchored epoch clock — TSC::epoch_ns()/epoch_ms()
+    -- replace timestamp.hpp's CLOCK_REALTIME now_ns/now_ms: one monotonic, NTP-jump-immune clock
+    -- serving both epoch stamps (auth expires, created_ns) and duration/scheduling.
+    -- BREAKING over 0.5.3: removes eph/utils/timestamp.hpp — consumers use eph/utils/time.hpp's
+    -- TSC::epoch_ns()/epoch_ms() instead of eph::utils::now_ns()/now_ms().
+    add_versions("0.5.4", "d1acf462cf53578d4c376e509b7e6cefa80cbb4f")
     add_versions("0.5.3", "c249cbceb345f704e0e9843f22413327aaae72ce")
     add_versions("0.5.2", "e0bad78ab91ec9a7275e4859b7e5084158c66439")
     add_versions("0.5.1", "a8b001b28637764cff27a0c357b0f9f13a0fbb91")
