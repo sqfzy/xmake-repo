@@ -36,6 +36,12 @@ package("eph")
     -- serving both epoch stamps (auth expires, created_ns) and duration/scheduling.
     -- BREAKING over 0.5.3: removes eph/utils/timestamp.hpp — consumers use eph/utils/time.hpp's
     -- TSC::epoch_ns()/epoch_ms() instead of eph::utils::now_ns()/now_ms().
+    -- 0.5.5 = ephemeral@d3571b5: epoch_ns/epoch_ms move OUT of TSC into free
+    -- eph::utils::epoch_ns()/epoch_ms() backed by system_clock (CLOCK_REALTIME) — plain
+    -- wall clock, unrelated to the TSC cycle counter; drops the TSC epoch anchor.
+    -- BREAKING over 0.5.4: TSC::epoch_ns()/epoch_ms() removed → use free eph::utils::epoch_ns().
+    -- Note: epoch_ns is NTP-jumpy again; use TSC::now()+to_ns() for monotonic scheduling.
+    add_versions("0.5.5", "d3571b514141815397098cd090f94aef20831505")
     add_versions("0.5.4", "d1acf462cf53578d4c376e509b7e6cefa80cbb4f")
     add_versions("0.5.3", "c249cbceb345f704e0e9843f22413327aaae72ce")
     add_versions("0.5.2", "e0bad78ab91ec9a7275e4859b7e5084158c66439")
