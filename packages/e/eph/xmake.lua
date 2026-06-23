@@ -41,6 +41,10 @@ package("eph")
     -- wall clock, unrelated to the TSC cycle counter; drops the TSC epoch anchor.
     -- BREAKING over 0.5.4: TSC::epoch_ns()/epoch_ms() removed → use free eph::utils::epoch_ns().
     -- Note: epoch_ns is NTP-jumpy again; use TSC::now()+to_ns() for monotonic scheduling.
+    -- 0.5.6 = ephemeral@4ba6644: add TSC::now_ns() — monotonic ns clock (= to_ns(now()))
+    -- for durations/deadlines/scheduling (immune to NTP/wall-clock steps); steady_clock
+    -- fallback if uncalibrated. Additive over 0.5.5.
+    add_versions("0.5.6", "4ba6644883d8438750f96fd0dc31136b7ba6147c")
     add_versions("0.5.5", "d3571b514141815397098cd090f94aef20831505")
     add_versions("0.5.4", "d1acf462cf53578d4c376e509b7e6cefa80cbb4f")
     add_versions("0.5.3", "c249cbceb345f704e0e9843f22413327aaae72ce")
